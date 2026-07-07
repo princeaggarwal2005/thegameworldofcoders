@@ -1,0 +1,397 @@
+# THEGAMEWORLD — Design Philosophy
+
+## Core Vision
+
+THEGAMEWORLD is **not** a dashboard.
+
+It is **not** another competitive programming analytics website.
+
+It is a **living fantasy world** where every competitive programmer exists as a character.
+
+The player's Codeforces profile is their save file.
+
+Their rating determines where they live.
+
+Their title determines their social status.
+
+Their progress changes the world around them.
+
+When someone opens the website, they should feel like they are **entering a kingdom**, not opening a statistics page.
+
+The first reaction should be:
+
+> "This feels like a game."
+
+Only after exploring should they realize that every piece of progression comes from real Codeforces data.
+
+---
+
+# Emotional Goal
+
+The UI should make users feel:
+
+- Pride
+- Progression
+- Curiosity
+- Discovery
+- Belonging
+
+The experience should encourage:
+
+> "I want to solve one more problem so I can unlock the next city."
+
+rather than
+
+> "My rating increased by 40."
+
+---
+
+# Core Inspiration
+
+Think of this project as:
+
+40% Clash Royale
+
+30% Genshin Impact
+
+20% League of Legends Client
+
+10% Candy Crush progression
+
+Not by copying assets, but by copying how they make progression feel meaningful.
+
+---
+
+# World Philosophy
+
+This is not a collection of pages.
+
+It is one persistent world.
+
+Every competitive programmer lives somewhere.
+
+Examples:
+
+Commoner
+→ Small village
+→ Dirt roads
+→ Wooden houses
+→ Training fields
+
+Knight
+→ Stone city
+→ Barracks
+→ Castle walls
+→ Guards
+
+Royal
+→ Capital city
+→ Grand bridges
+→ Markets
+→ Towers
+
+Monarch
+→ Massive kingdom
+→ Golden castle
+→ Mountains
+→ Rivers
+→ Royal palace
+
+The player's environment changes with progression.
+
+The world itself tells the story.
+
+---
+
+# Layout Philosophy
+
+The world is the primary content.
+
+The UI is an overlay.
+
+Instead of
+
+Background
+↓
+
+Cards
+
+↓
+
+Statistics
+
+The hierarchy should be
+
+Living World
+
+↓
+
+Soft blur / dark overlay
+
+↓
+
+Floating UI panels
+
+↓
+
+Interactive information
+
+The user should always feel that there is a world behind the interface.
+
+---
+
+# Landing Page
+
+The landing page should immediately establish atmosphere.
+
+Background:
+
+A beautiful medieval kingdom viewed from above.
+
+A subtle blur or dark overlay keeps the input readable.
+
+Center card:
+
+"Welcome to THEGAMEWORLD"
+
+Enter Codeforces Handle
+
+Below:
+
+Current online population
+
+Preview of the Codeforces Kingdom
+
+This should feel like entering an MMORPG.
+
+---
+
+# Player Page
+
+The player page should not resemble an admin dashboard.
+
+Imagine returning home.
+
+The camera is already inside the player's current kingdom.
+
+Background changes dynamically according to progression.
+
+UI panels float above the environment.
+
+The kingdom should remain visible.
+
+---
+
+# Visual Language
+
+Everything should communicate:
+
+Adventure
+
+Progress
+
+Kingdoms
+
+Guilds
+
+Discovery
+
+Prestige
+
+Avoid modern SaaS styling.
+
+Avoid flat dashboards.
+
+Avoid corporate blue gradients.
+
+Instead use:
+
+Stone
+
+Wood
+
+Gold
+
+Iron
+
+Flags
+
+Castle walls
+
+Mountain silhouettes
+
+Fog
+
+Sunlight
+
+Warm lighting
+
+---
+
+# Colour Palette
+
+Primary Background
+
+Deep navy
+
+#071320
+
+Secondary
+
+Royal blue
+
+#10233F
+
+Accent Gold
+
+#D4AF37
+
+Warm White
+
+#F5F2E8
+
+Muted Stone
+
+#7B7F89
+
+Forest Green
+
+#2E5E4E
+
+Danger
+
+Dark Crimson
+
+#8B2E2E
+
+Overall feeling:
+
+League of Legends client meets medieval fantasy.
+
+---
+
+# Typography
+
+Headings
+
+Elegant
+
+Bold
+
+Fantasy-inspired but readable.
+
+Body
+
+Modern sans-serif.
+
+The interface should remain clean.
+
+The fantasy should come from the world, not difficult-to-read fonts.
+
+---
+
+# Components
+
+Cards should feel like windows looking into the world.
+
+Rounded corners.
+
+Soft shadows.
+
+Slight transparency.
+
+Glass effect is acceptable if subtle.
+
+Nothing should feel overly futuristic.
+
+---
+
+# Animation Philosophy
+
+Animations should feel calm.
+
+Examples:
+
+Cards fade upward.
+
+Hover glow.
+
+Soft scaling.
+
+Camera-like transitions.
+
+Never flashy.
+
+Never distracting.
+
+The world should feel alive even when nothing is happening.
+
+---
+
+# Future Vision
+
+Eventually this world expands.
+
+Codeforces becomes one kingdom.
+
+LeetCode becomes another nation.
+
+AtCoder becomes another island.
+
+CodeChef another empire.
+
+Users travel between kingdoms.
+
+Guilds own castles.
+
+Universities become guilds.
+
+Companies host tournaments inside the world.
+
+The final goal is not to build another analytics website.
+
+The goal is to build **the virtual home of competitive programmers.**
+
+A place where millions of programmers feel they belong.
+
+---
+
+# References
+
+Use these references only for inspiration.
+
+Do not copy assets.
+
+## World
+
+- Genshin Impact (world feeling)
+- Minecraft medieval cities
+- Thronebreaker world map
+
+## Progression
+
+- Clash Royale Trophy Road
+- Candy Crush map progression
+
+## UI
+
+- League of Legends Client
+- Valorant menus
+
+## Atmosphere
+
+- Medieval fantasy kingdoms
+- Stone castles
+- Rivers
+- Bridges
+- Forests
+- Mountains
+- Small villages evolving into capital cities
+
+---
+
+# Most Important Rule
+
+Every design decision should answer one question:
+
+> "Does this make Competitive Programming feel like living inside a fantasy world?"

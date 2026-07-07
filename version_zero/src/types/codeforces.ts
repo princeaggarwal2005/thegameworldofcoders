@@ -15,6 +15,11 @@ contribution?: number;
 friendOfCount?: number;
 };
 
+export type CfRatedUser = {
+  handle: string;
+  rating: number;
+};
+
 // Clean user object our app uses — always has rating + isUnrated
 export type NormalizedCfUser = {
 handle: string;

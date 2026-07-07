@@ -75,13 +75,13 @@ THEGAMEWORLD/
 ```
 Layer 1 — Reality     CF API → normalize → analytics
 Layer 2 — Game        rating/xp → title, arena (config lookup)
-Layer 3 — Presentation  React pages + components (IN PROGRESS)
+Layer 3 — Presentation  React pages + components (Step 11 polish remaining)
 
 Flow:
   GET /api/player/[handle]
     → syncPlayer(handle)
-    → fetch CF (user.info, user.rating, user.status)
-    → normalize + analytics + resolveProgression
+    → fetch CF (user.info, user.rating, user.status) + getRatedList (6h cache)
+    → normalize + analytics + resolveProgression + buildRankings
     → PlayerViewModel JSON
 ```
 
@@ -98,8 +98,9 @@ Flow:
 | **Future title** | **XP-based, registered users only** (not raw CF rating) |
 | **Future arena** | XP-based, possibly different thresholds than title |
 | **Tags** | Come from `user.status` → `problem.tags` (no `problemset.problems` needed) |
-| **Population / ranklists** | Not built yet (Step 10) |
-| **Caching** | `fetchCf` uses `next: { revalidate: 300 }` — CF responses cached 5 min |
+| **Population** | `getRatedList` (6h cache) → `buildRankings` → `PopulationPanel` |
+| **Ranklists UI** | Deferred — `worldRank`/`cfGlobalRank` computed in backend, leaderboard UI later |
+| **Caching** | `fetchCf` = 5 min; `getRatedList` = 6h via `unstable_cache` (not `fetchCf`) |
 
 ---
 
@@ -149,6 +150,7 @@ Flow:
 - `user.info?handles=` — profile, rating, rank
 - `user.rating?handle=` — contest history → rating graph
 - `user.status?handle=&from=&count=` — submissions → heatmap, solved, tags
+- `user.ratedList?activeOnly=true` — arena population + ranks (6h cache)
 
 ---
 
@@ -166,12 +168,12 @@ Flow:
 | Step | User moment | Build |
 |------|-------------|-------|
 | **7** | Type handle, click Enter World | Landing `page.tsx` → navigate to `/world/[handle]` | ✅ Done |
-| **8** | See my title, arena, XP (ugly OK) | World page shell + fetch `/api/player/[handle]` |
-| **9** | Game-styled sections | Components: WorldMap, ArenaHub, AnalyticsPanel — cards over tables, Codolio-inspired analytics, Clash Royale-inspired arena tower |
-| **10** | "I'm not alone" | Population estimate + World Map Rank + CF Ranklist |
+| **8** | See my title, arena, XP (ugly OK) | World page shell + `syncPlayer()` | ✅ Done |
+| **9** | Game-styled sections | `ArenaHub`, `WorldMap`, `AnalyticsPanel` | ✅ Done |
+| **10** | "I'm not alone" | `getRatedList` + `buildRankings` + `PopulationPanel` | ✅ Done |
 | **11** | Shareable live URL | Polish, errors, deploy Vercel |
 
-**UI north star (Step 9+):** Backend provides data; frontend creates emotion. The player should feel they entered a world, not a stats site. See inspiration table in `DESIGN_PHILOSOPHY.md`.
+**UI north star (Step 11):** Backend provides data; frontend creates emotion. The player should feel they entered a world, not a stats site. See inspiration table in `DESIGN_PHILOSOPHY.md`.
 
 **Not in v0:** auth, quests, animations, LeetCode, Postgres (later for registered-user XP + title)
 
@@ -181,13 +183,21 @@ Flow:
 
 | File | Job |
 |------|-----|
-| `lib/reality/codeforces/client.ts` | All CF HTTP calls |
+| `lib/reality/codeforces/client.ts` | CF HTTP calls + `getRatedList` (6h cached) |
 | `lib/reality/codeforces/normalise.ts` | CfUser → NormalizedCfUser |
 | `lib/reality/sync/syncPlayer.ts` | Full pipeline → PlayerViewModel |
+| `lib/reality/analytics/ranking.ts` | Arena population + world/CF rank from ratedList |
 | `lib/reality/analytics/*` | heatmap, graph, tags, stats |
 | `lib/game/progression.ts` | Single entry to game engine |
 | `app/api/player/[handle]/route.ts` | Main API |
-| `types/player.ts` | PlayerViewModel, PlayerAnalytics, etc. |
+| `app/page.tsx` | Landing page |
+| `components/EnterWorldForm.tsx` | Handle input → `/world/[handle]` |
+| `app/world/[handle]/page.tsx` | World page — syncs player, composes UI |
+| `components/world/ArenaHub.tsx` | Title, arena, XP, rating |
+| `components/world/WorldMap.tsx` | Vertical fort tower, current/locked states |
+| `components/world/AnalyticsPanel.tsx` | Stat cards + tag chips |
+| `components/world/PopulationPanel.tsx` | Arena population count (game-styled) |
+| `types/player.ts` | PlayerViewModel, PlayerRankings, etc. |
 
 ---
 
@@ -217,3 +227,6 @@ Learning: Next.js App Router, React, TypeScript, Tailwind, `fetch`, file-based A
 | 2026-07-07 | Created this development history doc |
 | 2026-07-07 | Added `DESIGN_PHILOSOPHY.md`; updated PRD + this file with UI/world/animation philosophy and top-down build process |
 | 2026-07-07 | Step 7 — landing page + `EnterWorldForm` + `/world/[handle]` stub route |
+| 2026-07-07 | Step 8 — world page shell, `syncPlayer()`, plain progression display |
+| 2026-07-07 | Step 9 — `ArenaHub`, `WorldMap`, `AnalyticsPanel` on world page |
+| 2026-07-07 | Step 10 — `getRatedList` (6h cache), `buildRankings`, `PopulationPanel`; ranklist UI deferred |

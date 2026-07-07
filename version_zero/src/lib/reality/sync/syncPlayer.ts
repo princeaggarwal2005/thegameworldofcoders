@@ -6,6 +6,8 @@ import { computeTagStats,
     getStrongestTags , 
     getWeakestTags 
 } from "../analytics/tags";
+import { getRatedList } from "../codeforces/client";
+import { buildRankings } from "../analytics/ranking";
 
 import { countContests, countSolvedProblems } from "../analytics/stats";
 
@@ -22,13 +24,12 @@ import { NormalizeUser } from "../codeforces/normalise";
 
 export async function syncPlayer(handle: string): 
 Promise<PlayerViewModel> {
-    const [rawUser , ratingHistory , submissions] = await Promise.all(
-        [
-            getuserInfo(handle),
-            getUserRating(handle),
-            getUserStatus(handle),
-        ]
-    )
+    const [rawUser, ratingHistory, submissions, ratedList] = await Promise.all([
+        getuserInfo(handle),
+        getUserRating(handle),
+        getUserStatus(handle),
+        getRatedList(),
+      ]);
     const user = NormalizeUser(rawUser);
     const progression = resolveProgression(user.rating , user.isUnrated);
     const tagStats = computeTagStats(submissions);
@@ -47,5 +48,11 @@ Promise<PlayerViewModel> {
             weakestTags: getWeakestTags(tagStats)
         },
         syncedAt: new Date().toISOString(),
+        rankings: buildRankings(
+            ratedList,
+            progression.arena,
+            user.handle,
+            user.isUnrated
+          ),
     };
 }

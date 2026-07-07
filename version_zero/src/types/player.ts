@@ -35,4 +35,12 @@ export type PlayerViewModel = {
     progression: PlayerProgression;
     analytics: PlayerAnalytics;
     syncedAt: string;         // ISO timestamp of this sync
+    rankings: PlayerRankings;
+};
+
+  export type PlayerRankings = {
+    arenaPopulation: number;
+    worldRank: number | null;
+    cfGlobalRank: number | null;
   };
+  
