@@ -2,11 +2,14 @@
 
 > **Welcome to the world of competitive programmers.**
 
+🌐 **Live Demo:** https://thegameworldofcoders.vercel.app
+
 <p align="center">
   <img src="./assets/landing-page.png" width="100%" alt="Landing Page">
 </p>
 
 ---
+
 
 ## The Vision
 
@@ -29,7 +32,7 @@ Imagine a persistent world where:
 - 🤝 Universities become guilds.
 - 🌎 Players from around the world coexist inside the same universe.
 
-Instead of opening another coding website, you enter **your world**.
+Instead of opening another coding website, you enter **the world of competitive coders**.
 
 ---
 
