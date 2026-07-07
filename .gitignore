@@ -1,0 +1,14 @@
+# Dependencies & build
+version_zero/node_modules/
+version_zero/.next/
+version_zero/out/
+
+# Env secrets
+version_zero/.env
+version_zero/.env.local
+version_zero/.env*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
