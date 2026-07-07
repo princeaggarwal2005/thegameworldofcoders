@@ -12,3 +12,8 @@ version_zero/.env*.local
 .DS_Store
 Thumbs.db
 *.log
+# Internal planning docs
+DEVELOPMENT_HISTORY.md
+design_phylosophy.txt
+AGENTS.md
+CLAUDE.md
