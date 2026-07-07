@@ -3,7 +3,8 @@
 Before writing code, read:
 
 1. `../PRD.md` — product spec
-2. `../DEVELOPMENT_HISTORY.md` — what's built, what's next, how we work
+2. `../DESIGN_PHILOSOPHY.md` — how the world should feel, UI rules, build philosophy
+3. `../DEVELOPMENT_HISTORY.md` — what's built, what's next, how we work
 
 **App root:** `version_zero/`  
 **Main API:** `GET /api/player/[handle]` → `syncPlayer()` in `src/lib/reality/sync/syncPlayer.ts`

@@ -1,6 +1,6 @@
 # THEGAMEWORLD — Development History
 
-> **Purpose:** Onboarding doc for Prince + future AI chats. Read this **with** `PRD.md` before coding.  
+> **Purpose:** Onboarding doc for Prince + future AI chats. Read this **with** `PRD.md` and `DESIGN_PHILOSOPHY.md` before coding.  
 > **Last updated:** 2026-07-07  
 > **App code lives in:** `version_zero/` (Next.js)
 
@@ -9,14 +9,43 @@
 ## For new AI chats — read this first
 
 1. **`PRD.md`** — product vision, v0 scope, title/arena rules, what's out of scope  
-2. **This file** — what's built, what's next, how we work, key decisions  
-3. **`version_zero/src/`** — actual code
+2. **`DESIGN_PHILOSOPHY.md`** — how the world should feel, UI/animation/colour rules, inspiration sources, development philosophy  
+3. **This file** — what's built, what's next, how we work, key decisions  
+4. **`version_zero/src/`** — actual code
 
-**Teaching style (from Step 7 onward):** **Top-down**, not bottom-up.
-- Start from **user moment** → what's needed on screen → build only that → drill down if missing
-- Do **not** add `lib/` functions unless a screen needs them now
-- Format: discuss subgoal → options → pick + why → resources → code with comments
-- Max **2 functions per step** when building backend utilities
+---
+
+## How we build (top-down)
+
+Planning always starts top-down. Implementation naturally becomes bottom-up.
+
+**Before every feature, answer:**
+
+1. What experience is the player supposed to have?
+2. What screen are we building?
+3. What data is required?
+4. Which backend/API supports it?
+5. What helper functions/types are required?
+
+**For every implementation step:**
+
+1. Explain **what** we are building  
+2. Explain **why** we need it  
+3. Explain possible alternatives  
+4. Explain why the chosen approach is best  
+5. Then implement with clear comments  
+
+**Practical rules (from Step 7 onward):**
+
+- Start from **user moment** → what's needed on screen → build only that → drill down if missing  
+- Do **not** add `lib/` functions unless a screen needs them now  
+- Max **2 functions per step** when building backend utilities  
+- **Never optimize for writing more code** — optimize for making the project feel more alive  
+- **One polished screen > ten unfinished pages** — prefer polish over scope when uncertain  
+
+**Personal learning goal:** Every concept should answer — what problem existed, why this solution was invented, how it solves the problem, and how it appears in this project. The project is the classroom.
+
+Full philosophy: `DESIGN_PHILOSOPHY.md`.
 
 ---
 
@@ -24,9 +53,10 @@
 
 ```
 THEGAMEWORLD/
-  PRD.md                    # Product spec (v0.3)
-  DEVELOPMENT_HISTORY.md    # This file
-  version_zero/               # Next.js app — all code here
+  PRD.md                    # Product spec (v0.3) — what to build
+  DESIGN_PHILOSOPHY.md      # Design & dev philosophy — how it should feel
+  DEVELOPMENT_HISTORY.md    # This file — what's built, what's next
+  version_zero/             # Next.js app — all code here
     src/
       app/                    # Pages + API routes (Presentation + HTTP)
       config/                 # Title + arena threshold tables
@@ -135,11 +165,13 @@ Flow:
 
 | Step | User moment | Build |
 |------|-------------|-------|
-| **7** | Type handle, click Enter World | Landing `page.tsx` → navigate to `/world/[handle]` |
+| **7** | Type handle, click Enter World | Landing `page.tsx` → navigate to `/world/[handle]` | ✅ Done |
 | **8** | See my title, arena, XP (ugly OK) | World page shell + fetch `/api/player/[handle]` |
-| **9** | Game-styled sections | Components: WorldMap, ArenaHub, AnalyticsPanel |
+| **9** | Game-styled sections | Components: WorldMap, ArenaHub, AnalyticsPanel — cards over tables, Codolio-inspired analytics, Clash Royale-inspired arena tower |
 | **10** | "I'm not alone" | Population estimate + World Map Rank + CF Ranklist |
 | **11** | Shareable live URL | Polish, errors, deploy Vercel |
+
+**UI north star (Step 9+):** Backend provides data; frontend creates emotion. The player should feel they entered a world, not a stats site. See inspiration table in `DESIGN_PHILOSOPHY.md`.
 
 **Not in v0:** auth, quests, animations, LeetCode, Postgres (later for registered-user XP + title)
 
@@ -183,3 +215,5 @@ Learning: Next.js App Router, React, TypeScript, Tailwind, `fetch`, file-based A
 | 2026-07-07 | Step 6 — analytics + syncPlayer + `/api/player/[handle]` working |
 | 2026-07-07 | Switched teaching to **top-down** from Step 7 |
 | 2026-07-07 | Created this development history doc |
+| 2026-07-07 | Added `DESIGN_PHILOSOPHY.md`; updated PRD + this file with UI/world/animation philosophy and top-down build process |
+| 2026-07-07 | Step 7 — landing page + `EnterWorldForm` + `/world/[handle]` stub route |

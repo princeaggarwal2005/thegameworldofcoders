@@ -1,796 +1,604 @@
-# THEGAMEWORLD - Product Requirements Document (PRD)
+# THEGAMEWORLD — Product Requirements Document (PRD)
 
-> **Working Title:** THEGAMEWORLD  
-> **Status:** Draft v0.3 — Ready for review  
-> **Author:** Prince  
-> **Purpose:** Define a common vision and roadmap so all contributors (human or AI) build towards the same product.
-
----
-
-## V0 Quick Reference (review this first)
-
-| What | V0 behavior |
-|------|-------------|
-| **Enter** | CF handle → Enter World → sync → one-page world |
-| **Title** | From **CF rating** → Commoner … Monarch |
-| **Arena** | From **XP** → Base Camp … Monarch's Gate (fort on map) |
-| **XP** | `= CF rating` (0 if unrated) — V0 shortcut only |
-| **V0 thresholds** | Title table == Arena table (same bands, 8 tiers) |
-| **Unrated** | Commoner + Base Camp + XP 0 |
-| **Population** | Global CF estimate in your arena band |
-| **Rankings** | (1) World Map Rank — same arena (2) CF global ranklist |
-| **Refresh** | Manual button; rating drop = title + arena + XP drop |
-| **Not in V0** | Auth, quests, achievements, animations, other platforms |
+> **Version:** 1.0 (Living Document)
+>
+> **Purpose**
+>
+> Define what THEGAMEWORLD is, what Version 0 must deliver, and the long-term direction of the project.
+>
+> This document answers **WHAT** to build.
+>
+> Companion documents:
+>
+> - `DESIGN_PHILOSOPHY.md` → How the product should feel
+> - `DEVELOPMENT_HISTORY.md` → What's already built
+> - `CURRENT_STATE.md` → Current implementation milestone
 
 ---
 
-# Vision
+# 1. Vision
 
-Create the world's most engaging home for Competitive Programming.
+THEGAMEWORLD is a persistent virtual world built on top of real Competitive Programming.
 
-Instead of treating Codeforces, LeetCode, AtCoder and other competitive programming platforms as separate websites, players exist inside one persistent world where every real achievement shapes their in-game identity.
+Instead of visiting Codeforces, LeetCode, AtCoder and other platforms separately, players exist inside one connected world where their real programming achievements determine their in-game identity.
 
-The project should make Competitive Programming feel alive, social, rewarding and accessible while remaining a genuinely useful analytics platform.
+The objective is **not** to replace existing platforms.
 
-The long-term goal is to become the default home page for every competitive programmer.
+The objective is to make Competitive Programming feel alive, social and rewarding.
+
+Every title, arena and future progression system must originate from **real coding activity**, never artificial game grinding.
 
 ---
 
-# Product Philosophy
+# 2. Product Philosophy
 
-THEGAMEWORLD is **not** a game that teaches Competitive Programming.
+THEGAMEWORLD is:
 
-THEGAMEWORLD is **not** another analytics dashboard.
+- A Competitive Programming companion.
+- A visualization layer over real programming progress.
+- A social world built around coding.
+- A motivation system for solving more problems.
 
-Instead,
+THEGAMEWORLD is **not**:
 
-> **Real Competitive Programming drives everything inside the world.**
+- A coding platform.
+- A game that teaches DSA.
+- Another statistics dashboard with random gamification.
 
-Players cannot progress by playing the game alone.
+If all graphics disappeared, the application should still remain a genuinely useful Competitive Programming analytics tool.
 
-Every achievement inside the world must originate from real coding activity.
+---
+
+# 3. Core Goals
+
+### Primary Goal
+
+Make Competitive Programming feel exciting enough that users want to return every day.
+
+---
+
+### Secondary Goal
+
+Provide a better experience than opening individual Competitive Programming websites.
+
+---
+
+### Long-Term Goal
+
+Become the default homepage for Competitive Programmers.
+
+Instead of opening Codeforces first, users should naturally open THEGAMEWORLD.
+
+---
+
+# 4. Target Users
+
+### Version 0
+
+Competitive Programmers using Codeforces.
+
+### Future
+
+- LeetCode users
+- AtCoder users
+- ICPC participants
+- Beginners entering Competitive Programming
+- Programming communities and universities
+
+---
+
+# 5. Version 0 Scope
+
+Version 0 is intentionally small.
+
+Its purpose is to prove the core experience.
+
+A user should be able to:
+
+1. Enter a Codeforces handle.
+2. Enter THEGAMEWORLD.
+3. See their world identity.
+4. View useful analytics.
+5. Feel motivated to continue solving problems.
+
+Version 0 is **not** trying to build an MMO.
+
+It is a polished Competitive Programming companion with a game-inspired presentation layer.
+
+---
+
+# 6. Version 0 Features
+
+### Included
+
+- Codeforces integration
+- Player progression
+- Title system
+- Arena system
+- Analytics
+- World page
+- Arena population
+- Ranking lists
+- Static world map
+
+### Excluded
+
+- Authentication
+- Quests
+- Achievements
+- Guilds
+- Friends
+- Multiplayer
+- Animations
+- Multiple CP platforms
+- Database-backed progression
+- AI mentor
+
+These belong to future versions.
+
+---
+
+# 7. User Journey (V0)
+
+```
+
+Landing Page
+↓
+Enter Codeforces Handle
+↓
+Sync Codeforces
+↓
+Enter World
+↓
+View:
+
+• Title
+• Arena
+• XP
+• Analytics
+• Population
+• Rankings
+
+```
+
+Every interaction should reinforce one feeling:
+
+> **"I'm progressing inside a real Competitive Programming world."**
+
+# 8. Progression System (V0)
+
+THEGAMEWORLD has two independent progression systems.
+
+Although they use the same value in Version 0, they are intentionally modeled as separate concepts.
+
+| System | Driven By | Represents |
+|----------|-----------|------------|
+| **Title** | Codeforces Rating | Player identity |
+| **Arena** | XP | Player's position in the world |
+
+Version 0 simplification:
+
+```
+XP = Current Codeforces Rating
+```
+
+This allows both systems to stay synchronized while keeping the architecture flexible for future updates.
+
+Later versions will separate XP from rating.
+
+---
+
+## Title
+
+A title represents **who the player is** inside THEGAMEWORLD.
 
 Examples:
 
-- Solving problems
-- Participating in contests
-- Increasing ratings
-- Maintaining streaks
-- Completing platform-specific challenges
+- Commoner
+- Scout
+- Warrior
+- Knight
+- Commander
+- Royal Guard
+- Champion
+- Monarch
 
-The game exists only as a visualization and motivation layer.
+Titles are fantasy ranks.
 
----
-
-# Core Goals
-
-## Primary Goal
-
-Make people excited to come back every day and solve Competitive Programming problems.
+Official Codeforces ranks (Expert, Candidate Master, etc.) are displayed only as analytics.
 
 ---
 
-## Secondary Goal
+## Arena
 
-Provide better analytics than existing platforms.
+An arena represents **where the player currently exists** inside the world.
 
----
+Examples:
 
-## Tertiary Goal
+- Base Camp
+- Training Grounds
+- Warrior's Keep
+- Knight's Hall
+- Command Fortress
+- Royal Bastion
+- Champion's Citadel
+- Monarch's Gate
 
-Unify multiple Competitive Programming platforms into one persistent identity.
+Every arena corresponds to one XP range.
 
----
-
-## Long-Term Goal
-
-Become the "Steam" or "Discord" of Competitive Programming.
-
-A place where programmers naturally spend time before and after coding.
-
----
-
-# Design Principles
-
-## 1. Reality Drives the World
-
-Everything inside the world comes from real coding activity.
-
-No fake grinding.
-
-No artificial XP farms.
+Higher arenas remain visible but locked.
 
 ---
 
-## 2. Game is a Presentation Layer
+## XP
 
-If all graphics disappear,
-
-the application should still be a valuable Competitive Programming tool.
-
-Graphics enhance the experience.
-
-They do not replace functionality.
-
----
-
-## 3. Fast Above Everything
-
-The application should feel instant.
-
-Goals:
-
-- Extremely lightweight
-- Smooth on low-end laptops
-- Minimal GPU usage
-- Fast page loads
-- Responsive UI
-- Mobile-friendly architecture (future)
-
-Performance always wins over visual complexity.
-
----
-
-## 4. Social by Design
-
-Even when the application is used solo,
-
-the world should feel alive.
-
-Future multiplayer should feel like a natural extension rather than an additional feature.
-
----
-
-## 5. Beginner Friendly
-
-Competitive Programming feels intimidating.
-
-THEGAMEWORLD should make it feel approachable.
-
-Players should naturally discover concepts through exploration and progression.
-
----
-
-# Target Audience
-
-## Primary
-
-Competitive Programmers
-
-- Codeforces
-- LeetCode
-- AtCoder
-- CSES
-- CodeChef
-- ICPC participants
-
----
-
-## Secondary
-
-College students beginning Competitive Programming.
-
----
-
-## Future
-
-School students discovering programming.
-
----
-
-# Version 0 Goal
-
-**Primary emotional goal:** After solving problems and doing contests on Codeforces, the user opens THEGAMEWORLD, hits Refresh, and thinks:
-
-> *"Damn — I'm not alone. Thousands of people are grinding at my level too."*
-
-**Functional goal:** Enter a Codeforces handle, land on a static 2D island world map, and see — in one screen — your **title**, your **arena (fort)**, your **XP**, how crowded your arena is globally, your analytics, and two ranking lists.
-
-V0 is a **Codeforces API wrapper with a game-styled presentation layer**. No custom XP grind yet — but **title** and **arena** are modeled as separate concepts from day one.
-
----
-
-# Version 0 — User Flow
+Version 0:
 
 ```
-Landing (CF handle input)
-    → Click "Enter World"
-    → Sync Codeforces data (first load + manual Refresh)
-    → World Page (single static screen, no page navigation required)
+XP = Current Codeforces Rating
 ```
 
-### World Page layout (one pager)
+Unrated players receive:
 
-| Zone | Content |
-|------|---------|
-| **World Map** | Static 2D island map. Tower / vertical arena layout inspired by Sword Art Online + Clash Royale. User's current arena highlighted. Future arenas visible but locked. No swipe (future: Candy Crush / Shadow Fight style multi-map scroll). |
-| **Arena Population** | **Global** estimated count of Codeforces users in the user's current arena band. e.g. *"~3,241 in Knight's Hall"* — never THEGAMEWORLD signup count. |
-| **Arena Hub** | **Title**, **Arena (fort name)**, **XP** only (see Progression Model) |
-| **Analytics Panel** | Game-styled but readable stats (Codolio-inspired clarity) |
-| **World Map Rank** | Handles in the same arena band as the user — "who's on the map with me" |
-| **Codeforces Ranklist** | Standard CF global rating ranklist, as on codeforces.com |
+- XP = 0
+- Title = Commoner
+- Arena = Base Camp
 
-### Interactions (V0)
+Future versions will generate XP from:
 
-- **Enter World** — fetch/sync CF data for handle
-- **Refresh** — re-sync CF data for current handle (manual)
-- **Change handle** — return to landing (or inline input; implementation choice)
-
-No animations. No transitions required. Static UI is acceptable.
+- Problems solved
+- Contests
+- Streaks
+- Multiple CP platforms
+- Quests
 
 ---
 
-# Version 0 Scope
+# 9. World Page
 
-## Platform Support
+After entering a Codeforces handle, the player enters a single world page.
 
-Only **Codeforces**.
+The page contains:
 
-All other platforms are intentionally excluded until Phase 2.
+### Arena Hub
 
----
+Displays:
 
-## Identity Model (V0)
-
-- **No login, no accounts, no auth**
-- User enters any public Codeforces handle
-- Anyone can view any public handle (same as existing CF stat sites)
-- Optional: remember last handle in `localStorage` (nice-to-have, not blocking)
-- Handle ownership verification → **Phase 1**
+- Title
+- Arena
+- XP
+- Rating
 
 ---
 
-## Sync Model (V0)
+### Analytics
 
-| Trigger | Behavior |
-|---------|----------|
-| **Enter World** | Full sync: CF user info, rating, submissions (for analytics), rank |
-| **Refresh button** | Re-fetch from CF API, update all displayed state |
-| **Rate limit** | Max 1 manual refresh per handle per 5 minutes |
-| **Midnight global refresh** | Deferred — cache population stats; add scheduled job in v0.5 |
+Core statistics:
 
-Sync is **idempotent**. Refreshing without new CF activity changes nothing except timestamps.
+- Current Rating
+- Maximum Rating
+- Contests Played
+- Problems Solved
+- Rating Graph
+- Activity Heatmap
+- Strongest Tags
+- Weakest Tags
 
 ---
 
-## Progression Model — LOCKED
+### Population
 
-THEGAMEWORLD always has **two independent progression axes**:
+Displays the estimated number of Codeforces users currently inside the player's arena.
 
-| Axis | Driven by | What it represents | V0 source |
-|------|-----------|-------------------|-----------|
-| **Title** | **Rating** | Identity / rank — who you are (Commoner, Knight, Monarch) | Current CF rating |
-| **Arena** | **XP** | Place on the map — which fort you stand in (Base Camp, Knight's Hall, …) | Current CF rating (= XP in V0) |
+This is based on global Codeforces data, **not** THEGAMEWORLD users.
 
-Think of it as: **Title = Monarch** (your rank). **Arena = Monarch's Gate** (your fort on the map).
+Example:
+
+> Approximately 3,200 players are currently in Knight's Hall.
+
+---
+
+### Rankings
+
+Two ranking systems exist.
+
+#### World Rank
+
+Players inside the same arena.
+
+Purpose:
+
+Creates the feeling that the player exists alongside others in the world.
+
+---
+
+#### Codeforces Rank
+
+Standard global Codeforces ranking.
+
+This remains unchanged from the official platform.
+
+---
+
+### Refresh
+
+The player may manually refresh.
+
+Refreshing:
+
+- Fetches latest Codeforces data.
+- Updates progression.
+- Updates analytics.
+- Updates rankings.
+
+No custom data is modified.
+
+---
+
+# 10. World Layout (V0)
+
+Version 0 uses a single static island.
+
+Progression moves vertically through forts.
+
+Example:
 
 ```
-Rating  ──→  Title   (identity)
-XP      ──→  Arena   (map position)
+Monarch's Gate
+
+Champion's Citadel
+
+Royal Bastion
+
+Command Fortress
+
+Knight's Hall
+
+Warrior's Keep
+
+Training Grounds
+
+Base Camp
 ```
 
-### V0 simplification (intentional)
+Only the player's current arena is highlighted.
 
-In V0, `XP = current CF rating`. Because both axes read the same number, **title thresholds and arena thresholds are identical** — same min/max bands, same tier count. You will always land in the matching fort for your title.
+Future arenas remain visible but inaccessible.
 
-This is a **shipping shortcut**, not the final design. Config keeps **two separate tables** (`titles.config.ts`, `arenas.config.ts`) so they can diverge in Phase 1.5 without refactoring.
+The map is intentionally simple.
 
-| Concept | V0 rule |
-|---------|---------|
-| **XP** | `XP = current CF rating` (integer). Displayed in Arena Hub. Drives arena lookup. |
-| **Title** | Lookup from **Title Threshold Table** (Appendix A). Driven by **rating**. |
-| **Arena** | Lookup from **Arena Threshold Table** (Appendix B). Driven by **XP**. Map zone / fort name. |
-| **Level** | **Not a separate field.** Title *is* your level identity. No third number in Arena Hub. |
+The purpose is to establish the feeling of existing inside a world rather than another dashboard.
+# 11. Technical Architecture
 
-### Unrated users
+THEGAMEWORLD follows a simple three-layer architecture.
 
-No contest history on Codeforces:
+```
+Reality Layer
+    ↓
+Game Layer
+    ↓
+Presentation Layer
+```
 
-| Field | Value |
-|-------|-------|
-| Title | Commoner |
-| Arena | Base Camp |
-| XP | `0` |
-
-### Rating drops
-
-If CF rating drops after a bad contest, **title, arena, and XP all move down**. V0 mirrors current rating honestly — no peak-rating freeze.
-
-`maxRating` is shown in **analytics only**, not used for title or arena in V0.
-
-### Future (post-V0) — dual-track fully active
-
-| Axis | Source | Example |
-|------|--------|---------|
-| **Title** | Platform rating(s) across countries | 1800 CF + Expert LC → **Knight** |
-| **Arena / XP** | Custom XP from solves, contests, streaks, cross-platform activity | High activity, moderate rating → **Frontier Outpost** while title stays **Warrior** |
-
-Title and arena **will decouple**. Separate thresholds. That's why two config files exist from V0.
-
----
-
-## Arena Population (V0)
-
-**Critical:** Population counts must reflect the **global Codeforces community**, not just THEGAMEWORLD users.
-
-Implementation:
-
-1. Cache a **rating distribution histogram** (bucketed by arena bands) from CF public data
-2. On render, show estimated count for user's arena band
-3. Label clearly: *"~3,241 estimated from Codeforces community"*
-
-Without global estimates, a new app shows "0 users" and kills the core emotional goal.
-
-Refresh population cache: manual admin refresh in V0; scheduled midnight job in v0.5.
-
----
-
-## Analytics (V0)
-
-Game-styled presentation. Codolio-inspired readability — scannable cards, clear labels, no clutter.
-
-### P0 — must ship
-
-- Current rating + max rating
-- Global CF rank
-- Contests participated
-- Problems solved (total)
-- Rating graph (history)
-- Activity heatmap
-- Strongest tags (top 3)
-- Weakest tags (top 3)
-
-### P1 — ship if time allows
-
-- Problems by rating (distribution)
-- Problems by tag (full breakdown)
-- Submission activity timeline
-- Streak
-
----
-
-## Ranking Lists (V0)
-
-Two separate lists on the world page:
-
-### 1. World Map Rank — "Users on the map"
-
-Players in the **same arena band** as the current user.
-
-| Property | Detail |
-|----------|--------|
-| Purpose | Reinforce *"I'm not alone — these people are in my fort"* |
-| Source | CF ranklist API, filtered to handles whose rating/XP falls in user's arena band |
-| Display | Paginated or top N (e.g. 20) + user's position within arena band if computable |
-| Scope | Same arena only — not global |
-
-### 2. Codeforces Ranklist — "As on CF"
-
-Standard **global Codeforces rating ranklist**, matching what users see on codeforces.com.
-
-| Property | Detail |
-|----------|--------|
-| Purpose | Familiar reference rank — no reinventing the leaderboard |
-| Source | CF ranklist API (global, by rating) |
-| Display | Top N globally + highlight current user's global rank row |
-| Scope | All rated CF users |
-
-No friends system. Viewing another player = enter their handle on landing (future: quick compare input).
-
----
-
-## World Map (V0)
-
-- **Format:** Static 2D island, single page, no swipe
-- **Layout:** Vertical tower / stacked arenas (SAO floor + Clash Royale arena inspiration)
-- **States per arena node:** `locked` | `current` | `cleared` (cleared = user rating ever reached this band in current season — optional; default: `current` + all lower = accessible, higher = locked)
-- **Art:** Simple game-style SVG/CSS illustration acceptable. No 3D. No animation.
-
-Future: swipable multi-map worlds unlocked as user progresses (Candy Crush / Shadow Fight pattern).
-
----
-
-## Game Layer (V0)
-
-V0 game layer is **lookup tables + CF rating**, not a custom XP engine.
-
-Implement:
-
-- Title resolution (`rating` → title)
-- XP value (`rating` → integer, V0 only)
-- Arena resolution (`xp` → arena / fort name)
-- Arena population lookup (cached global histogram)
-- World Map Rank fetch (handles in same arena band)
-- Codeforces Ranklist fetch (global CF ranklist)
-
-Do **not** implement in V0:
-
-- Custom XP formula
-- Daily quests
-- Achievements
-- Quest rewards
-- Separate leveling curve
-
----
-
-# Explicitly Out of Scope (Version 0)
-
-- User accounts / authentication / handle verification
-- Custom XP engine (separate from CF rating)
-- Daily quests
-- Achievements
-- Animations / motion effects (Framer Motion deferred)
-- Multiplayer / live players
-- Friends / guilds / chat
-- PvP
-- Marketplace
-- AI coach
-- Seasonal events
-- Swipable / multi-page maps
-- Multiple platforms (LeetCode, AtCoder, etc.)
-- Mobile app
-- Midnight scheduled cron (deferred to v0.5)
-
----
-
-# Technical Architecture
-
-The application is divided into three independent layers.
-
----
-
-## Layer 1 — Reality Layer
+### Reality Layer
 
 Responsible for:
 
-- Fetching external APIs
-- Syncing data
-- Database storage
+- External APIs
+- Data synchronization
+- Analytics generation
 
-Contains **zero game logic**.
+Contains no game logic.
 
 ---
 
-## Layer 2 — Game Engine
+### Game Layer
 
 Responsible for:
 
-- Rating → Title resolution (V0: static lookup table)
-- XP → Arena resolution (V0: static lookup table; XP = rating)
-- Arena population bucket lookup
-- Future: custom XP, quests, achievements, multi-platform aggregation
+- Progression
+- Titles
+- Arenas
+- XP
+- Future quests and achievements
 
-Contains **zero UI logic**.
-
-V0 note: Layer 2 is thin — config tables + pure functions. No XP accumulation logic.
+Contains no UI logic.
 
 ---
 
-## Layer 3 — Presentation Layer
+### Presentation Layer
 
 Responsible for:
 
-- UI
-- World Map (static 2D)
-- Arena Hub (Title, Arena, XP)
-- Analytics Panel
-- World Map Rank + Codeforces Ranklist
+- World Map
+- Arena Hub
+- Analytics
+- Rankings
+- Overall user experience
 
-V0: **no animations, no effects.** Motion libraries deferred.
+The frontend visualizes the data produced by the lower layers.
 
 ---
 
-# Tech Stack
+# 12. Technology Stack
 
 ## Frontend
 
 - Next.js
 - React
 - TypeScript
-- TailwindCSS
-
-Deferred (post-V0): Framer Motion
-
----
+- Tailwind CSS
 
 ## Backend
 
-- Node.js
 - Next.js API Routes
 
----
-
-## Database
+## Database (Future)
 
 - PostgreSQL
-- Prisma ORM
-
----
+- Prisma
 
 ## Hosting
 
 - Vercel
-- Neon PostgreSQL
 
 ---
 
-## APIs
+# 13. Success Criteria (V0)
 
-Version 0:
+Version 0 is successful if a user can:
 
-- Codeforces API
+- Enter a Codeforces handle.
+- Enter THEGAMEWORLD.
+- See their title, arena and XP.
+- View meaningful analytics.
+- View arena population.
+- View rankings.
+- Refresh their data.
 
-Future:
-
-- LeetCode
-- AtCoder
-- CodeChef
-- CSES
-
----
-
-# Success Criteria (Version 0)
-
-A user should be able to:
-
-1. Enter a Codeforces handle and click **Enter World**
-2. See a static 2D island map with their current arena highlighted
-3. See **estimated population** in their arena band
-4. See **Arena Hub**: Title (from rating), Arena fort name (from XP), XP (= CF rating in V0)
-5. See **analytics** (P0 list) in readable game-styled layout
-6. See **World Map Rank** (users in same arena band) and **Codeforces Ranklist** (global CF ranklist)
-7. Click **Refresh** after solving problems / contests and see updated title, arena, XP, analytics, ranks
-
-All without reading documentation.
+The application should feel fast, simple and polished.
 
 ---
 
-# Appendix A — Title Threshold Table (V0)
+# 14. Out of Scope
 
-Maps **current CF rating** → **Title** (identity).
+The following are intentionally excluded from Version 0:
 
-| Tier | Min Rating | Max Rating | Title |
-|------|------------|------------|-------|
-| 1 | 0 | 1199 | Commoner |
-| 2 | 1200 | 1399 | Scout |
-| 3 | 1400 | 1599 | Warrior |
-| 4 | 1600 | 1899 | Knight |
-| 5 | 1900 | 2099 | Commander |
-| 6 | 2100 | 2299 | Royal Guard |
-| 7 | 2300 | 2399 | Champion |
-| 8 | 2400 | ∞ | Monarch |
+- Authentication
+- Multiple platforms
+- Guilds
+- Friends
+- Chat
+- Quests
+- Achievements
+- Animations
+- Multiplayer
+- AI Mentor
 
-**Unrated:** Title = `Commoner`.
+These belong to future releases.
 
-Titles are fantasy identity labels. CF official ranks (Newbie, Specialist, Expert, …) appear in **analytics only**.
+# 15. Roadmap
 
----
+Development will happen in phases.
 
-# Appendix B — Arena Threshold Table (V0)
+## Version 0
 
-Maps **XP** → **Arena** (fort / map zone).
+Build a polished Codeforces companion.
 
-V0: XP equals CF rating, so bands match Appendix A exactly. Tables stay separate for future divergence.
-
-| Tier | Min XP | Max XP | Arena (Fort) | Map order (bottom → top) |
-|------|--------|--------|--------------|--------------------------|
-| 1 | 0 | 1199 | Base Camp | 1 (bottom) |
-| 2 | 1200 | 1399 | Training Grounds | 2 |
-| 3 | 1400 | 1599 | Warrior's Keep | 3 |
-| 4 | 1600 | 1899 | Knight's Hall | 4 |
-| 5 | 1900 | 2099 | Command Fortress | 5 |
-| 6 | 2100 | 2299 | Royal Bastion | 6 |
-| 7 | 2300 | 2399 | Champion's Citadel | 7 |
-| 8 | 2400 | ∞ | Monarch's Gate | 8 (top) |
-
-**Unrated:** Arena = `Base Camp`, XP = `0`.
-
-Arenas above user's current band: visible on map, **locked** (grayed). Arenas below: **cleared** (accessible visually).
+- Codeforces integration
+- Progression system
+- Static world map
+- Analytics
+- Rankings
+- Fast, clean UI
 
 ---
 
-# Appendix C — XP (V0)
+## Phase 1
 
-```
-XP = currentCodeforcesRating   // integer; 0 if unrated
-```
+Player Accounts
 
-| V0 | Future |
-|----|--------|
-| XP source = CF rating only | XP from solves, contests, streaks, multi-platform activity |
-| XP drives arena lookup | XP still drives arena lookup |
-| Rating drives title lookup | Rating (per country) still drives title lookup |
-
-No custom XP formula in V0.
-
----
-
-# Appendix D — Config Files (Implementation)
-
-All thresholds live in version-controlled config, not hardcoded in UI:
-
-```
-src/config/titles.config.ts
-src/config/arenas.config.ts
-src/config/analytics.config.ts   // P0 vs P1 feature flags
-```
-
-Game engine reads configs only. Changing a threshold never requires UI changes.
-
----
-
-# Appendix E — V0 Decision Log
-
-All product decisions locked for Version 0. Change only via explicit PRD revision.
-
-| # | Decision | Status |
-|---|----------|--------|
-| 1 | Arena population = **global CF estimate**, not app user count | Locked |
-| 2 | **Title** from rating; **Arena** from XP; separate concepts, identical thresholds in V0 | Locked |
-| 3 | No separate **Level** field — title is the identity tier | Locked |
-| 4 | Rating drops → title, arena, XP all drop with current CF rating | Locked |
-| 5 | **Two ranking lists:** World Map Rank (same arena) + Codeforces Ranklist (global) | Locked |
-| 6 | Unrated → **Commoner** + **Base Camp** + XP `0` | Locked |
-| 7 | No auth, no quests, no achievements, no animations | Locked |
-| 8 | Manual Refresh; midnight cron deferred to v0.5 | Locked |
-| 9 | Static 2D island map, single page, SAO / Clash Royale tower layout | Locked |
-| 10 | Codeforces only | Locked |
-
----
-
-# Future Roadmap
-
-## Phase 1 — Accounts + Progression Engine
-
-- Google Login / handle claiming
+- Authentication
+- Handle ownership
 - Persistent profiles
-- Custom XP formula (multi-source)
+- Saved progression
+
+---
+
+## Phase 2
+
+Custom Progression
+
+- XP no longer equals CF rating
+- Separate Title and Arena progression
 - Daily quests
 - Achievements
-- Midnight scheduled sync
-- Animations (optional polish)
+- Progress history
 
 ---
 
-## Phase 1.5 — Dual-Track Progression (thresholds diverge)
+## Phase 3
 
-- **Title** continues from platform rating(s) — identity unchanged
-- **Arena** moves to custom XP formula — map position decouples from title
-- `titles.config.ts` and `arenas.config.ts` thresholds diverge for the first time
-- Example: **Knight** title + **Training Grounds** arena if XP lagging
+Multi-Platform Support
 
----
-
-## Phase 2 — Multiple Platforms
-
-Support:
+Integrate:
 
 - LeetCode
 - AtCoder
 - CodeChef
 - CSES
 
-Create one unified player profile.
+Create one unified player identity across Competitive Programming.
 
 ---
 
-## Phase 3 — Living World
+## Phase 4
 
-Replace dashboard navigation with world exploration.
+Living World
 
-Players move through a persistent world.
+Transform the static map into an interactive world.
 
-Different regions represent:
+Possible additions:
 
-- Platforms
-- Communities
-- Events
-- Challenges
-
----
-
-## Phase 4 — Guilds
-
-Guild Examples:
-
-- Universities
-- Companies
-- Countries
-- Private Communities
-
-Examples:
-
-- DTU
-- MIT
-- Google
-- India
-- Japan
-
-Guild Features:
-
-- Rankings
-- Quests
-- Guild Wars
-- Shared Progress
+- Multiple islands
+- Region exploration
+- Interactive buildings
+- Discoverable locations
 
 ---
 
-## Phase 5 — Live Multiplayer
+## Phase 5
 
-Introduce:
+Social Features
 
-- Live Players
-- Movement Synchronization
-- Public Spaces
-- Player Interaction
-- Spectating
-
-The world should feel populated.
-
----
-
-## Phase 6 — Events
-
-Examples:
-
-- Weekly Bosses
-- Seasonal Events
-- ICPC Festivals
-- Company Sponsored Competitions
-- Community Challenges
+- Guilds
+- University communities
+- Company communities
+- Friends
+- Leaderboards
+- Guild rankings
 
 ---
 
-## Phase 7 — AI Mentor
+## Phase 6
 
-Personalized coaching.
+Live Multiplayer
 
-Features:
+Bring the world to life.
 
-- Weakness Detection
-- Personalized Quests
-- Problem Recommendations
-- Contest Reviews
-- Learning Roadmaps
+Ideas include:
 
----
-
-## Phase 8 — Educational Mode
-
-Teach Competitive Programming through exploration.
-
-Interactive regions for:
-
-- Arrays
-- Binary Search
-- Graphs
-- Trees
-- Dynamic Programming
-- Math
-- Strings
-
-Players learn by progressing through the world.
+- Live player presence
+- Spectator mode
+- Contest hubs
+- Monarch battles
+- Community events
 
 ---
 
-## Phase 9 — THEGAMEWORLD
+## Phase 7
 
-A persistent online universe for programmers.
+Learning Mode
 
-Every solved problem, contest and achievement leaves a visible mark on the player's journey.
+Help beginners enter Competitive Programming through exploration.
 
-Instead of existing as separate websites,
+Possible features:
 
-Competitive Programming becomes one connected world.
+- Guided learning paths
+- Topic-based regions
+- AI mentor
+- Personalized recommendations
 
 ---
 
 # Guiding Principle
 
-Whenever a new feature is proposed, ask:
+Every new feature should answer one question:
 
-> **Does this make solving one more problem feel more exciting?**
+> **Does this make solving one more Competitive Programming problem more enjoyable?**
 
-If the answer is **no**, reconsider the feature.
+If the answer is **no**, the feature should be reconsidered.
 
-Every design decision should increase motivation, curiosity and long-term engagement while remaining useful as a Competitive Programming platform.
+THEGAMEWORLD is not trying to become another game.
+
+It is trying to become the world's most engaging companion for Competitive Programming.
