@@ -3,7 +3,6 @@ import ArenaHub from "@/components/world/ArenaHub";
 import WorldMap from "@/components/world/WorldMap";
 import AnalyticsPanel from "@/components/world/AnalyticsPanel";
 import PopulationPanel from "@/components/world/PopulationPanel";
-
 type WorldPageProps = {
   params: Promise<{ handle: string }>;
 };

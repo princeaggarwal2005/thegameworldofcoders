@@ -1,4 +1,6 @@
 import type { PlayerAnalytics } from "@/types/player";
+import RatingLineChart from "./RatingLineChart";
+import SubmissionHeatmap from "./SubmissionHeatmap";
 
 type Props = {
   analytics: PlayerAnalytics;
@@ -18,6 +20,7 @@ export default function AnalyticsPanel({ analytics, rating }: Props) {
       </p>
       <h2 className="mt-2 text-2xl font-black text-white">Your Progress</h2>
 
+      {/* Stats Cards Grid */}
       <dl className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Card label="Current Rating" value={String(rating)} />
         <Card label="Max Rating" value={String(maxRating)} />
@@ -25,8 +28,15 @@ export default function AnalyticsPanel({ analytics, rating }: Props) {
         <Card label="Solved" value={String(analytics.problemsSolved)} />
       </dl>
 
-      <TagGroup title="Strongest" tags={analytics.strongestTags} />
-      <TagGroup title="Weakest" tags={analytics.weakestTags} />
+      {/* Visual Graphs Section */}
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <RatingLineChart data={analytics.ratingGraph} />
+        <SubmissionHeatmap data={analytics.heatmap} />
+      </div>
+
+      {/* Skill Strengths & Weaknesses */}
+      <TagGroup title="Strongest Topics" tags={analytics.strongestTags} />
+      <TagGroup title="Weakest Topics" tags={analytics.weakestTags} />
     </section>
   );
 }
@@ -46,7 +56,7 @@ function TagGroup({ title, tags }: { title: string; tags: string[] }) {
   if (tags.length === 0) return null;
 
   return (
-    <div className="mt-6">
+    <div className="mt-8 border-t border-white/5 pt-6">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
         {title}
       </p>
